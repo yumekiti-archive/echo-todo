@@ -1,8 +1,6 @@
 package usecase
 
 import (
-	"errors"
-
 	"github.com/yumekiti/echo-todo/domain"
 	"github.com/yumekiti/echo-todo/domain/repository"
 )
@@ -71,12 +69,11 @@ func (tu *taskUsecase) Update(task *domain.Task) (*domain.Task, error) {
 		return nil, err
 	}
 
-	if task.Title == "" {
-		return nil, errors.New("Please enter a title")
+	err = targetTask.Validation(task)
+	if err != nil {
+		return nil, err
 	}
 
-	targetTask.Title = task.Title
-	targetTask.Body = task.Body
 	updatedTask, err := tu.taskRepo.Save(targetTask)
 	if err != nil {
 		return nil, err
