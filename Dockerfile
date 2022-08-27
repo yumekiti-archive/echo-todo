@@ -6,6 +6,8 @@ ENV GO111MODULE=on
 WORKDIR /go/src/app
 COPY . .
 
+RUN apk add --no-cache gcc musl-dev
+
 EXPOSE 8080
 
 RUN go install github.com/cosmtrek/air@latest
