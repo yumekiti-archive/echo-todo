@@ -1,6 +1,8 @@
 package usecase
 
 import (
+	"errors"
+
 	"github.com/yumekiti/echo-todo/domain"
 	"github.com/yumekiti/echo-todo/domain/repository"
 )
@@ -64,7 +66,18 @@ func (tu *taskUsecase) Remove(id int) error {
 }
 
 func (tu *taskUsecase) Update(task *domain.Task) (*domain.Task, error) {
-	updatedTask, err := tu.taskRepo.Update(task)
+	targetTask, err := tu.taskRepo.Get(task.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	if task.Title == "" {
+		return nil, errors.New("Please enter a title")
+	}
+
+	targetTask.Title = task.Title
+	targetTask.Body = task.Body
+	updatedTask, err := tu.taskRepo.Save(targetTask)
 	if err != nil {
 		return nil, err
 	}
