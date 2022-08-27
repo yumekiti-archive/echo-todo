@@ -12,6 +12,7 @@ import (
 type TaskHandler interface {
 	Post() echo.HandlerFunc
 	Get() echo.HandlerFunc
+	GetAll() echo.HandlerFunc
 	Put() echo.HandlerFunc
 	Delete() echo.HandlerFunc
 }
