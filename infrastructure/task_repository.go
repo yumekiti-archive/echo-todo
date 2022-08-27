@@ -46,7 +46,7 @@ func (tr *taskRepository) Remove(task *domain.Task) error {
 }
 
 func (tr *taskRepository) Update(task *domain.Task) (*domain.Task, error) {
-	if err := tr.Conn.Save(&task).Error; err != nil {
+	if err := tr.Conn.Model(&task).Save(&task).Error; err != nil {
 		return nil, err
 	}
 	return task, nil

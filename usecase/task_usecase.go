@@ -11,7 +11,7 @@ type TaskUsecase interface {
 	GetAll() ([]*domain.Task, error)
 	Save(*domain.Task) (*domain.Task, error)
 	Remove(id int) error
-	Update(id int, task *domain.Task) (*domain.Task, error)
+	Update(task *domain.Task) (*domain.Task, error)
 }
 
 type taskUsecase struct {
@@ -63,13 +63,8 @@ func (tu *taskUsecase) Remove(id int) error {
 	return nil
 }
 
-func (tu *taskUsecase) Update(id int, task *domain.Task) (*domain.Task, error) {
-	targetTask, err := tu.taskRepo.Get(id)
-	if err != nil {
-		return nil, err
-	}
-
-	updatedTask, err := tu.taskRepo.Update(targetTask)
+func (tu *taskUsecase) Update(task *domain.Task) (*domain.Task, error) {
+	updatedTask, err := tu.taskRepo.Update(task)
 	if err != nil {
 		return nil, err
 	}

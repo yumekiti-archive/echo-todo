@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -111,7 +112,9 @@ func (th *taskHandler) Put() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		updatedTask, err := th.taskUsecase.Update(id, &domain.Task{ID: id, Title: req.Title, Body: req.Body})
+		fmt.Print(req.Title)
+
+		updatedTask, err := th.taskUsecase.Update(&domain.Task{ID: id, Title: req.Title, Body: req.Body})
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
