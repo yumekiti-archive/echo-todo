@@ -49,6 +49,7 @@ func (th *taskHandler) Post() echo.HandlerFunc {
 		}
 
 		res := responseTask{
+			ID:    createdTask.ID,
 			Title: createdTask.Title,
 			Body:  createdTask.Body,
 		}
