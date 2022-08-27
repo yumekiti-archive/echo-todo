@@ -43,7 +43,7 @@ func (th *taskHandler) Post() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		createdTask, err := th.taskUsecase.Save(&domain.Task{0, req.Title, req.Body})
+		createdTask, err := th.taskUsecase.Save(&domain.Task{ID: 0, Title: req.Title, Body: req.Body})
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
@@ -111,7 +111,7 @@ func (th *taskHandler) Put() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		updatedTask, err := th.taskUsecase.Update(id, &domain.Task{id, req.Title, req.Body})
+		updatedTask, err := th.taskUsecase.Update(id, &domain.Task{ID: id, Title: req.Title, Body: req.Body})
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err.Error())
 		}
