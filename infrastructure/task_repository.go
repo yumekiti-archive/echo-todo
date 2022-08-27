@@ -38,8 +38,8 @@ func (tr *taskRepository) Save(task *domain.Task) (*domain.Task, error) {
 	return task, nil
 }
 
-func (tr *taskRepository) Remove(id int) error {
-	if err := tr.Conn.Delete(&domain.Task{}, id).Error; err != nil {
+func (tr *taskRepository) Remove(task *domain.Task) error {
+	if err := tr.Conn.Delete(&task).Error; err != nil {
 		return err
 	}
 	return nil
