@@ -5,7 +5,6 @@ import (
 	"github.com/yumekiti/echo-todo/domain/repository"
 )
 
-// TaskUsecase task usecaseのinterface
 type TaskUsecase interface {
 	Get(id int) (*domain.Task, error)
 	GetAll() ([]*domain.Task, error)
