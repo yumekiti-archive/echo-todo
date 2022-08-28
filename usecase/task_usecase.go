@@ -40,6 +40,11 @@ func (tu *taskUsecase) GetAll() ([]*domain.Task, error) {
 }
 
 func (tu *taskUsecase) Save(task *domain.Task) (*domain.Task, error) {
+	err := task.Set(task)
+	if err != nil {
+		return nil, err
+	}
+
 	savedTask, err := tu.taskRepo.Save(task)
 	if err != nil {
 		return nil, err
@@ -68,7 +73,7 @@ func (tu *taskUsecase) Update(task *domain.Task) (*domain.Task, error) {
 		return nil, err
 	}
 
-	err = targetTask.Validation(task)
+	err = targetTask.Set(task)
 	if err != nil {
 		return nil, err
 	}

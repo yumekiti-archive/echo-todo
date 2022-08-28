@@ -8,7 +8,8 @@ type Task struct {
 	Body  string
 }
 
-func (t *Task) Validation(task *Task) error {
+func (t *Task) Set(task *Task) error {
+	// Validation
 	if task.Title == "" {
 		return errors.New("Please enter a title")
 	}
