@@ -1,4 +1,4 @@
-dc := docker-compose -f ./docker-compose.yml
+dc := docker compose -f ./docker-compose.yml
 
 up:
 	$(dc) up -d
@@ -20,6 +20,6 @@ logs:
 	$(dc) logs -f
 
 app:
-	$(dc) exec app /bin/sh
+	$(dc) exec echo /bin/sh
 
 .PHONY:	setup up down restart reup rm logs app db
