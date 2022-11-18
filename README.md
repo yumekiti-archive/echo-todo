@@ -37,3 +37,9 @@ curl -X PUT "http://localhost:8080/task/1" -H "Content-Type: application/json" -
 
 curl -X DELETE "http://localhost:8080/task/1"
 ```
+
+## テスト
+
+```
+go test -v ./usecase/...
+```

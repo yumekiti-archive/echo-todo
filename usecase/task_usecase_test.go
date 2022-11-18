@@ -78,3 +78,36 @@ func TestSaveMulti(t *testing.T) {
 		assert.Equal(t, task, task)
 	}
 }
+
+func TestRemove(t *testing.T) {
+	// Mock
+	mockTaskRepo := new(mocks.TaskRepository)
+	mockTask := &domain.Task{ID: 1, Title: "title", Body: "body"}
+	mockTaskRepo.On("Get", mock.AnythingOfType("int")).Return(mockTask, nil)
+	mockTaskRepo.On("Save", mock.AnythingOfType("*domain.Task")).Return(mockTask, nil)
+	mockTaskRepo.On("Remove", mock.AnythingOfType("*domain.Task")).Return(nil)
+
+	// UseCase
+	taskUsecase := NewTaskUsecase(mockTaskRepo)
+
+	// Test
+	err := taskUsecase.Remove(1)
+	assert.NoError(t, err)
+}
+
+func TestUpdate(t *testing.T) {
+	// Mock
+	mockTaskRepo := new(mocks.TaskRepository)
+	mockTask := &domain.Task{ID: 1, Title: "title", Body: "body"}
+	mockTaskRepo.On("Get", mock.AnythingOfType("int")).Return(mockTask, nil)
+	mockTaskRepo.On("Save", mock.AnythingOfType("*domain.Task")).Return(mockTask, nil)
+	mockTaskRepo.On("Update", mock.AnythingOfType("*domain.Task")).Return(mockTask, nil)
+
+	// UseCase
+	taskUsecase := NewTaskUsecase(mockTaskRepo)
+
+	// Test
+	task, err := taskUsecase.Update(mockTask)
+	assert.NoError(t, err)
+	assert.Equal(t, mockTask, task)
+}
